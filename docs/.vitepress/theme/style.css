@@ -1,5 +1,5 @@
 /* 💡 引入思源黑体 (Noto Sans SC) */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+@import url('https://fonts.ustc.edu.cn/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
 
 html {
   font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -21,147 +21,158 @@ body {
   box-sizing: border-box;
 }
 
-/* ==========================================================================
-   ✨ 文章正文基础排版
-   ========================================================================== */
-
-html .markdown-body {
-  color: #2c3e50 !important;
-  line-height: 1.85 !important;
-  letter-spacing: 0.02em !important;
+/* markdown样式 */
+.markdown-body {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  /* 黄金行高 */
+  color: #2c3e50;
 }
 
-html .markdown-body h1,
-html .markdown-body h2,
-html .markdown-body h3 {
-  color: #1a202c !important;
-  font-weight: 700 !important;
-  margin-top: 1.6em !important;
-  margin-bottom: 0.6em !important;
-  line-height: 1.4 !important;
+.markdown-body h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #3eaf7c;
 }
 
-html .markdown-body h1 {
-  font-size: 2.2rem !important;
-  border-bottom: 2px solid #e2e8f0 !important;
-  padding-bottom: 0.3em !important;
+/* 小章节标题 */
+.markdown-body h2 {
+  font-size: 1.65rem;
+  font-weight: 600;
+  padding-bottom: 0.3rem;
+  border-left: 6px solid rgb(250, 236, 216);
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  padding-left: 0.75rem;
 }
 
-html .markdown-body h2 {
-  font-size: 1.6rem !important;
-  border-bottom: 1px solid #edf2f7 !important;
-  padding-bottom: 0.4em !important;
+.markdown-body h3 {
+  margin: 0;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-left: 1rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.4;
+  border-left: 4px solid rgb(252, 211, 211);
 }
 
-html .markdown-body p,
-html .markdown-body li {
-  font-size: 16px !important;
-  margin-top: 0 !important;
-  margin-bottom: 1.2em !important;
+/* 正文段落和列表间距 */
+.markdown-body p,
+.markdown-body ul,
+.markdown-body ol {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
 }
 
-html .markdown-body :not(pre)>code {
-  font-family: Menlo, Monaco, Consolas, monospace !important;
-  font-size: 0.88em !important;
-  color: #476582 !important;
-  /* 官方默认行内代码蓝灰色 */
-  background-color: #f1f1f1 !important;
-  /* 官方浅灰气泡底 */
-  padding: 3px 6px !important;
-  border-radius: 4px !important;
-}
-
-html .markdown-body blockquote {
-  margin: 1.5em 0 !important;
-  padding: 12px 20px !important;
-  background-color: #f6f6f7 !important;
-  border-left: 4px solid #3eaf7c !important;
-  border-radius: 0 8px 8px 0 !important;
-}
-
-html .markdown-body img {
+.markdown-body img {
+  display: block;
   max-width: 100% !important;
   height: auto !important;
-  display: block !important;
-  margin: 2em auto !important;
-  border-radius: 8px !important;
+  margin: 1.5rem auto;
+  border-radius: 6px;
 }
 
-/* ==========================================================================
-   🎨 完美复刻：VitePress 官方轻量浅灰代码块样式
-   ========================================================================== */
-
-/* 1. 外层大盒子：改成官方特调的浅灰色背景和微圆角 */
-html .markdown-body div[class*="language-"] {
-  position: relative !important;
-  margin: 1.6em 0 !important;
-  background-color: #f6f6f7 !important;
-  /* 💡 官方原版浅灰底色 */
-  border-radius: 8px !important;
-  /* 💡 官方标准 8px 圆角 */
-  overflow: hidden !important;
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  /* 核心防溢出：太宽时自动生成表格内滚动条 */
+  border-collapse: collapse;
+  /* 合并边框，避免双线边框 */
+  margin: 1.5rem 0;
+  /* 上下推开间距 */
 }
 
-/* 2. 语言标签：拉到右上角，小写、淡色、无边框（完全还原官方视觉） */
-html .markdown-body div[class*="language-"] span.lang {
-  position: absolute !important;
-  top: 12px !important;
-  /* 💡 居右上方 */
-  right: 24px !important;
-  left: auto !important;
-  /* 清除之前的左侧定位 */
-  font-size: 12px !important;
-  font-family: monospace !important;
-  color: rgba(60, 60, 67, 0.4) !important;
-  /* 💡 官方极其克制的淡灰色字 */
-  font-weight: 500 !important;
-  text-transform: lowercase !important;
-  /* 💡 强行小写，如 vue, powershell */
-  background: none !important;
-  border: none !important;
-  padding: 0 !important;
-  z-index: 5 !important;
-  user-select: none !important;
+/* 单元格通用基础设置（表头和正文格） */
+.markdown-body th,
+.markdown-body td {
+  padding: 10px 16px;
+  /* 舒适的格子留白 */
+  border: 1px solid #e2e8f0;
+  /* 现代细腻的淡灰边框 */
+  font-size: 0.95rem;
+  /* 表格字号比正文稍微小一点点，更精致 */
+  line-height: 1.5;
+  text-align: left;
+  /* 默认左对齐 */
 }
 
-/* 3. 内层代码 pre 容器：由于语言标签去了右上角，顶部和左侧恢复舒适的窄边距 */
-html .markdown-body div[class*="language-"] pre.shiki {
-  position: relative !important;
-  margin: 0 !important;
-  padding: 20px 24px !important;
-  /* 💡 官方对称的内边距 */
-  background-color: transparent !important;
-  /* 彻底透明，露出外层的浅灰底 */
-  overflow-x: auto !important;
-  z-index: 2 !important;
+/* 🌟 表头特化样式 (th) */
+.markdown-body th {
+  font-weight: 600;
+  color: #1e293b;
+  /* 深色文字 */
+  background-color: #f8fafc;
+  /* 表头淡淡的灰色背景，拉开层级 */
 }
 
-/* 4. 行号微调（如果你开了行号，它会完美呆在左边；没开也不影响布局） */
-html .markdown-body div[class*="language-"] .line-numbers-wrapper {
-  position: absolute !important;
-  top: 20px !important;
-  left: 0 !important;
-  width: 42px !important;
-  text-align: right !important;
-  padding-right: 12px !important;
-  border-right: 1px solid rgba(60, 60, 67, 0.08) !important;
-  color: rgba(60, 60, 67, 0.3) !important;
-  font-family: monospace !important;
-  font-size: 14px !important;
-  line-height: 1.7 !important;
-  user-select: none !important;
-  z-index: 4 !important;
+/* 🌟 隔行变色（斑马纹）
+   给偶数行 (even) 加上极淡的底色，方便眼睛换行阅读数据 */
+.markdown-body tbody tr:nth-child(even) {
+  background-color: #fcfcfd;
 }
 
-/* 如果开了行号，给 pre 增加左边距以免重叠 */
-html .markdown-body div[class*="language-"].line-numbers-mode pre.shiki {
-  padding-left: 56px !important;
+/* 鼠标悬停在某一行时，该行高亮变色（极佳的交互细节） */
+.markdown-body tbody tr:hover {
+  background-color: #f1f5f9;
 }
 
-/* ==========================================================================
-   📋 完美放回复制按钮（悬浮在右上角显示）
-   ========================================================================== */
 
+
+
+
+
+.markdown-body [class^="language-"] {
+  position: relative;
+  margin: 1.5rem 0;
+  /* 上下推开间距，与段落保持呼吸感 */
+  background-color: #f6f8fa;
+  /* 浅色主题底色（如果是深色主题可用 #1e1e1e 等） */
+  border-radius: 8px;
+  /* 代码块圆角 */
+  border: 1px solid #e1e4e8;
+  /* 淡淡的边框，让代码块轮廓更清晰 */
+  overflow: hidden;
+  /* 确保内部多出的内容或圆角不溢出 */
+}
+
+/* ==========================================
+   2. 核心防溢出：真正的代码标签 (pre)
+   ========================================== */
+.markdown-body [class^="language-"] pre {
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  background: transparent !important;
+  overflow-x: auto;
+  white-space: pre;
+  word-break: normal;
+  font-family: ui-monospace, SFMono-Regular, SF Pro Text, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   3. 右上角语言提示标签 (如图中的 powershell)
+   ========================================== */
+.markdown-body [class^="language-"] span.lang {
+  position: absolute;
+  top: 2%;
+  right: 8px;
+  z-index: 2;
+  font-size: 0.75rem;
+  color: #6a737d;
+  font-family: sans-serif;
+  pointer-events: none;
+  /* 防止鼠标悬停干扰复制按钮 */
+}
+
+/* ==========================================
+   4. 复制代码按钮 (Copy Code Button)
+   ========================================== */
 html .markdown-body div[class*="language-"] button.copy {
   display: block !important;
   position: absolute !important;
@@ -169,34 +180,60 @@ html .markdown-body div[class*="language-"] button.copy {
   right: 12px !important;
   width: 32px !important;
   height: 32px !important;
-  border-radius: 4px !important;
+  border-radius: 6px !important;
+  /* 稍微圆润一点更现代 */
   border: 1px solid rgba(60, 60, 67, 0.12) !important;
   background-color: #ffffff !important;
-  /* 纯白按钮底 */
   cursor: pointer !important;
   opacity: 0 !important;
-  /* 鼠标不放上去时隐形 */
+  /* 默认隐形 */
   z-index: 10 !important;
-  transition: opacity 0.2s ease !important;
 
-  /* SVG 剪贴板图标 */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='rgba(60,60,67,0.7)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpath d='M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2'%3E%3C/path%3E%3Crect x='8' y='2' width='8' height='4' rx='1' ry='1'%3E%3C/rect%3E%3C/svg%3E") !important;
+  /* 🌟 核心：把原本的 "Copy Code" 文字缩写成 0，彻底变纯图标按钮 */
+  font-size: 0 !important;
+  color: transparent !important;
+
+  /* 默认：未点击时的双页剪贴板图标（比原本的单页更好看、线条更细） */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(60,60,67,0.7)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'%3E%3C/path%3E%3C/svg%3E") !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
-  background-size: 14px !important;
+  background-size: 15px !important;
+
+  /* 丝滑过渡：加入了点击微缩（transform）的过渡 */
+  transition: opacity 0.2s ease, background-color 0.2s ease, transform 0.1s ease !important;
 }
 
-/* 鼠标划入代码块时，复制按钮显现 */
+/* =========================================
+   2. 悬停与物理按压交互
+   ========================================= */
+
+/* 鼠标划入代码块，按钮显现 */
 html .markdown-body div[class*="language-"]:hover button.copy {
   opacity: 1 !important;
 }
 
+/* 鼠标精准悬停在按钮上时，背景微灰 */
 html .markdown-body div[class*="language-"] button.copy:hover {
   background-color: #f6f6f7 !important;
 }
 
-/* 复制成功反馈 */
-html .markdown-body div[class*="language-"] button.copy.copied {
+/* 🌟 增加物理点击反馈：点下去的一瞬间按钮陷下去一点，极具操作感 */
+html .markdown-body div[class*="language-"] button.copy:active {
+  transform: scale(0.92) !important;
+}
+
+html .markdown-body div[class*="language-"] button.copy.copied,
+html .markdown-body div[class*="language-"] button.copy[title*="Copied"],
+html .markdown-body div[class*="language-"] button.copy[title*="成功"] {
   opacity: 1 !important;
+  /* 成功状态：变成你准备的绿色精致对勾 */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%233eaf7c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-size: 16px !important;
+  background-color: #e6f4ea !important;
+  /* 🌟 顺便让背景变成淡淡的科技绿，反馈更直观！ */
+  border-color: rgba(62, 175, 124, 0.3) !important;
+}
+
+.markdown-body [class^="language-"]:hover span.lang {
+  opacity: 0;
 }
