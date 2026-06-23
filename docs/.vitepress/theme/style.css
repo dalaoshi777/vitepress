@@ -23,56 +23,48 @@ body {
 
 /* markdown样式 */
 .markdown-body {
+  display: flex;
+  flex-direction: column;
   font-family: 'Noto Sans SC', sans-serif;
   font-size: 16px;
   line-height: 1.75;
-  /* 黄金行高 */
   color: #2c3e50;
+  width: 100%;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
 .markdown-body h1 {
   font-size: 2.2rem;
   font-weight: 700;
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid #3eaf7c;
 }
 
 /* 小章节标题 */
 .markdown-body h2 {
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
   font-size: 1.65rem;
   font-weight: 600;
-  padding-bottom: 0.3rem;
-  border-left: 6px solid rgb(250, 236, 216);
-  margin-top: 2.5rem;
-  margin-bottom: 1.25rem;
-  padding-left: 0.75rem;
+  background-color: oklch(98.2% 0.018 155.826);
+  border: 1px solid oklch(92.5% 0.084 155.995);
 }
 
 .markdown-body h3 {
-  margin: 0;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
-  padding-left: 1rem;
+  border-radius: 6px;
+  background-color: oklch(98.7% 0.026 102.212);
+  border: 1px solid oklch(94.5% 0.071 103.193);
+  padding: 0.2rem 0.5rem;
   font-size: 1.35rem;
   font-weight: 600;
-  line-height: 1.4;
-  border-left: 4px solid rgb(252, 211, 211);
 }
 
-/* 正文段落和列表间距 */
-.markdown-body p,
-.markdown-body ul,
-.markdown-body ol {
-  margin-top: 0;
-  margin-bottom: 1.2rem;
-}
 
 .markdown-body img {
   display: block;
   max-width: 100% !important;
   height: auto !important;
-  margin: 1.5rem auto;
   border-radius: 6px;
 }
 
@@ -80,11 +72,7 @@ body {
   display: block;
   width: 100%;
   overflow-x: auto;
-  /* 核心防溢出：太宽时自动生成表格内滚动条 */
   border-collapse: collapse;
-  /* 合并边框，避免双线边框 */
-  margin: 1.5rem 0;
-  /* 上下推开间距 */
 }
 
 /* 单元格通用基础设置（表头和正文格） */

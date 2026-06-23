@@ -13,6 +13,7 @@ const { page } = useData()
         <a href="/" :class="{ 'is-active': page.relativePath === 'index.md' }">首页</a>
         <a href="/archives/ " :class="{ 'is-active': page.relativePath === 'archives.md' }">归档</a>
         <a href="/about/" :class="{ 'is-active': page.relativePath === 'about.md' }">关于</a>
+        <a href="/friends/" :class="{ 'is-active': page.relativePath === 'friends.md' }">友链</a>
       </div>
     </div>
   </nav>
