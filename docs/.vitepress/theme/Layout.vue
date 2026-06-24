@@ -41,21 +41,18 @@ const { page, frontmatter } = useData()
 }
 
 .site-header {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  z-index: 100 !important;
-  background-color: rgba(255, 255, 255, 0.7) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  backdrop-filter: blur(8px) !important;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.01) !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  background-color: var(--main-bg);
 }
 
 .site-main {
   flex: 1;
-  background-color: #f6f8fa;
+  background-color: var(--main-bg);
   padding-top: 60px;
 }
 
@@ -77,6 +74,7 @@ const { page, frontmatter } = useData()
   text-align: center;
   padding: 20px;
   border-top: 1px solid #eee;
-  color: #999;
+  color: var(--text-color);
+  background-color: var(--main-bg);
 }
 </style>
