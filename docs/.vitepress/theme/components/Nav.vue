@@ -22,8 +22,8 @@ const navItems = [
       </div>
       <div class="nav-links flex gap-2">
         <a v-for="item in navItems" :key="item.path" :href="item.link"
-          class="py-1.5 px-3.5 hover:bg-gray-100 rounded-md transition-all duration-300 ease-in-out active:scale-90"
-          :class="{ 'text-white bg-green-500 hover:bg-green-500 font-semibold': page.relativePath === item.path }">
+          class="py-1.5 px-3.5 text-gray-600 hover:bg-gray-100 rounded-md active:scale-95 transition-all duration-200 ease-out"
+          :class="{ 'text-white bg-green-500 hover:bg-green-600 font-semibold': page.relativePath === item.path }">
           {{ item.text }}
         </a>
 
