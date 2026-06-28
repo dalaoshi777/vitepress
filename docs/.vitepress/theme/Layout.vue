@@ -46,8 +46,7 @@ const { page, frontmatter } = useData()
   left: 0;
   width: 100%;
   z-index: 100;
-  backdrop-filter: blur(12px);
-  background-color: var(--main-bg);
+  background-color: white;
 }
 
 .site-main {

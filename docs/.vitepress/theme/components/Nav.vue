@@ -1,24 +1,35 @@
 <script lang="ts" setup>
+import { title } from 'node:process';
 import { useData } from 'vitepress'
 const { page } = useData()
 const { isDark } = useData()
 function toggleTheme() {
   isDark.value = !isDark.value
 }
+const navItems = [
+  { text: '首页', link: '/', path: 'index.md' },
+  { text: '归档', link: '/archives/', path: 'archives.md' },
+  { text: '关于', link: '/about/', path: 'about.md' },
+  { text: '友链', link: '/friends/', path: 'friends.md' }
+]
 </script>
 
 <template>
-  <nav class="site-nav">
-    <div class="nav-content">
-      <div class="nav-logo">
+  <nav class="site-nav w-full">
+    <div class="nav-content max-w-4xl h-16 flex justify-center md:justify-between items-center px-6 mx-auto ">
+      <div class="nav-logo text-2xl font-bold hidden md:block">
         Megumin's Blog
       </div>
-      <div class="nav-links">
-        <a href="/" :class="{ 'is-active': page.relativePath === 'index.md' }">首页</a>
-        <a href="/archives/ " :class="{ 'is-active': page.relativePath === 'archives.md' }">归档</a>
-        <a href="/about/" :class="{ 'is-active': page.relativePath === 'about.md' }">关于</a>
-        <a href="/friends/" :class="{ 'is-active': page.relativePath === 'friends.md' }">友链</a>
-        <button class="theme-toggle-btn" @click="toggleTheme">
+      <div class="nav-links flex gap-2">
+        <a v-for="item in navItems" :key="item.path" :href="item.link"
+          class="py-1.5 px-3.5 hover:bg-gray-100 rounded-md transition-all duration-300 ease-in-out active:scale-90"
+          :class="{ 'text-white bg-green-500 hover:bg-green-500 font-semibold': page.relativePath === item.path }">
+          {{ item.text }}
+        </a>
+
+        <button
+          class="theme-toggle-btn flex justify-center items-center w-9 h-auto hover:bg-gray-100 active:scale-90 rounded-lg transition-all duration-200 ease-in-out"
+          @click="toggleTheme">
           <!-- 太阳图标 -->
           <svg v-if="!isDark" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-sun"
@@ -51,73 +62,8 @@ function toggleTheme() {
 
 <style scoped>
 .site-nav {
-  width: 100%;
-  border-bottom: 1px solid #f0f0f0;
-
-  .nav-content {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 24px;
-    height: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .nav-logo {
-      font-size: 1.5em;
-      font-weight: bold;
-      color: var(--text-color);
-    }
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 16px;
-
-    a {
-      padding: 6px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      color: var(--text-color);
-      font-weight: 500;
-      transition: all 0.2s ease-in-out;
-    }
-
-    a:hover {
-      background-color: var(--nav-hover-bg-color);
-      color: var(--nav-light-color);
-
-    }
-
-    a:active {
-      transform: scale(0.96);
-    }
-
-    .is-active {
-      color: var(--nav-light-color);
-      background-color: var(--nav-light-bg-color);
-      font-weight: 600;
-    }
-  }
 
   .theme-toggle-btn {
-    color: var(--text-color);
-    display: flex;
-    width: 36px;
-    height: 36px;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-      background-color: #f0f0f0;
-      color: var(--nav-light-color);
-    }
-
     &:active {
       transform: scale(0.96);
     }

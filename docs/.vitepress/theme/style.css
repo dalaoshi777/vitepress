@@ -1,4 +1,5 @@
 @import url('https://fonts.ustc.edu.cn/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+@import "tailwindcss";
 
 :root {
   --green-50: oklch(98.2% 0.018 155.826);
@@ -14,9 +15,6 @@
   --gray-300: oklch(87.2% 0.01 258.338);
   --gray-400: oklch(70.7% 0.022 261.325);
   --gray-500: oklch(55.1% 0.027 264.364);
-
-
-
 
   /* 背景颜色 */
   --main-bg: var(--gray-50);
