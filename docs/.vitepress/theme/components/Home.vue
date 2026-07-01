@@ -89,18 +89,19 @@ const changePage = (page: number) => {
 
       <div v-else class="posts-list flex flex-col gap-2">
         <a v-for="post in paginatedPosts" :key="post.url" :href="post.url"
-          class="post-item flex flex-col p-3 gap-3 rounded-lg active:scale-99 transition-all delay-200 ease-in-out bg-gray-100 dark:bg-[#17181A] dark:hover:bg-white/5">
+          class="post-item flex flex-col p-3 gap-3 rounded-lg bg-gray-100 dark:bg-[#17181A] hover:bg-gray-200/80 dark:hover:bg-white/5">
 
           <span class="post-item__title text-xl font-bold text-black dark:text-white">{{ post.title }}</span>
 
           <div v-if="post.tags && post.tags.length" class="post-item__tags flex gap-2">
             <span v-for="tag in post.tags" :key="tag"
-              class="tag-badge text-xs font-bold px-1 py-2 rounded-md bg-green-400/90">#{{
+              class="tag-badge inline-flex items-center text-sm font-normal px-3 py-1 rounded bg-green-700 text-white">#{{
                 tag
               }}</span>
           </div>
           <div v-else class="post-item__tags">
-            <span class="tag-badge tag-badge--none text-xs font-bold px-1 py-2 rounded-md bg-green-400/90">#无标签</span>
+            <span
+              class="tag-badge tag-badge--none inline-flex items-center text-sm font-normal px-3 py-1 rounded bg-green-700 text-white">#无标签</span>
           </div>
 
           <time class="post-item__date">{{ post.date }}</time>
@@ -151,13 +152,6 @@ const changePage = (page: number) => {
   font-weight: normal;
 }
 
-.tag-badge {
-  padding: 4px 8px;
-
-  &:hover {
-    background-color: #c0c0c0;
-  }
-}
 
 .tag-cloud-wrapper {
   padding: 4px 0;
