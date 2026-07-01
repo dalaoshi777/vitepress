@@ -10,10 +10,10 @@ const { page, frontmatter } = useData()
 
 <template>
   <div class="site-wrapper">
-    <header class="site-header">
+    <header class="site-header bg-white dark:bg-[#1E2022]">
       <Nav />
     </header>
-    <main class="site-main">
+    <main class="site-main flex-1 bg-gray-50 pt-16 dark:bg-[#17181A]">
       <Home v-if="frontmatter.layout === 'home'" />
       <NotFound v-else-if="page.isNotFound" />
       <Fridens v-else-if="frontmatter.layout === 'fridens'" />
@@ -46,14 +46,9 @@ const { page, frontmatter } = useData()
   left: 0;
   width: 100%;
   z-index: 100;
-  background-color: white;
 }
 
-.site-main {
-  flex: 1;
-  background-color: var(--main-bg);
-  padding-top: 60px;
-}
+.site-main {}
 
 .article-container {
   display: flex;

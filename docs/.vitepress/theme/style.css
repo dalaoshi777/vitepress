@@ -1,5 +1,6 @@
 @import url('https://fonts.ustc.edu.cn/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --green-50: oklch(98.2% 0.018 155.826);

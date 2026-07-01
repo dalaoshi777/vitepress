@@ -17,18 +17,18 @@ const navItems = [
 <template>
   <nav class="site-nav w-full">
     <div class="nav-content max-w-4xl h-16 flex justify-center md:justify-between items-center px-6 mx-auto ">
-      <div class="nav-logo text-2xl font-bold hidden md:block">
+      <div class="nav-logo text-2xl font-bold hidden md:block dark:text-white">
         Megumin's Blog
       </div>
       <div class="nav-links flex gap-2">
         <a v-for="item in navItems" :key="item.path" :href="item.link"
-          class="py-1.5 px-3.5 text-gray-600 hover:bg-gray-100 rounded-md active:scale-95 transition-all duration-200 ease-out"
-          :class="{ 'text-white bg-green-500 hover:bg-green-600 font-semibold': page.relativePath === item.path }">
+          class="py-1.5 px-3.5 text-black hover:bg-gray-100 rounded-md active:translate-y-0.5 transition-all duration-100 ease-out dark:text-white dark:hover:bg-gray-50/10"
+          :class="{ 'text-white bg-green-500 hover:bg-green-600 font-semibold dark:bg-white/10': page.relativePath === item.path }">
           {{ item.text }}
         </a>
 
         <button
-          class="theme-toggle-btn flex justify-center items-center w-9 h-auto hover:bg-gray-100 active:scale-90 rounded-lg transition-all duration-200 ease-in-out cursor-pointer"
+          class="theme-toggle-btn flex justify-center items-center w-9 h-auto hover:bg-gray-100 active:scale-90 rounded-lg transition-all duration-200 ease-in-out cursor-pointer dark:hover:bg-gray-50/10 dark:text-white"
           @click="toggleTheme">
           <!-- 太阳图标 -->
           <svg v-if="!isDark" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -60,13 +60,4 @@ const navItems = [
   </nav>
 </template>
 
-<style scoped>
-.site-nav {
-
-  .theme-toggle-btn {
-    &:active {
-      transform: scale(0.96);
-    }
-  }
-}
-</style>
+<style scoped></style>

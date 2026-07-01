@@ -73,7 +73,7 @@ const changePage = (page: number) => {
     <Card v-if="allTags.length > 0" title="标签云" class="post-card">
       <div class="tag-cloud-wrapper">
         <div class="tag-cloud__list">
-          <button v-for="tag in allTags" :key="tag"
+          <button v-for="tag in allTags" :key="tag" class="bg-white text-black dark:bg-black dark:text-white"
             :class="['tag-cloud__item', { 'is-active': selectedTags.includes(tag) }]" @click="toggleTag(tag)">
             #{{ tag }}
           </button>
@@ -87,16 +87,20 @@ const changePage = (page: number) => {
         📭 暂无文章发布
       </div>
 
-      <div v-else class="posts-list">
-        <a v-for="post in paginatedPosts" :key="post.url" :href="post.url" class="post-item">
+      <div v-else class="posts-list flex flex-col gap-2">
+        <a v-for="post in paginatedPosts" :key="post.url" :href="post.url"
+          class="post-item flex flex-col p-3 gap-3 rounded-lg active:scale-99 transition-all delay-200 ease-in-out bg-gray-100 dark:bg-[#17181A] dark:hover:bg-white/5">
 
-          <span class="post-item__title">{{ post.title }}</span>
+          <span class="post-item__title text-xl font-bold text-black dark:text-white">{{ post.title }}</span>
 
-          <div v-if="post.tags && post.tags.length" class="post-item__tags">
-            <span v-for="tag in post.tags" :key="tag" class="tag-badge">#{{ tag }}</span>
+          <div v-if="post.tags && post.tags.length" class="post-item__tags flex gap-2">
+            <span v-for="tag in post.tags" :key="tag"
+              class="tag-badge text-xs font-bold px-1 py-2 rounded-md bg-green-400/90">#{{
+                tag
+              }}</span>
           </div>
           <div v-else class="post-item__tags">
-            <span class="tag-badge tag-badge--none">#无标签</span>
+            <span class="tag-badge tag-badge--none text-xs font-bold px-1 py-2 rounded-md bg-green-400/90">#无标签</span>
           </div>
 
           <time class="post-item__date">{{ post.date }}</time>
@@ -141,57 +145,14 @@ const changePage = (page: number) => {
   max-width: 960px;
 }
 
-.posts-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.post-item {
-  display: flex;
-  gap: 12px;
-  flex-direction: column;
-  padding: 12px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  color: #000;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    background-color: #f0f0f0;
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-}
-
-.post-item__title {
-  font-size: 16px;
-  font-weight: bold;
-}
-
 .post-item__date {
   font-size: 14px;
   color: #94a3b8;
   font-weight: normal;
 }
 
-.post-item__tags {
-  display: flex;
-  gap: 8px;
-}
-
 .tag-badge {
   padding: 4px 8px;
-  border-radius: 4px;
-  background-color: #e0e0e0;
-  color: #333;
-  font-size: 12px;
-  font-weight: bold;
-  border: 1px solid rgb(209, 237, 196);
-
 
   &:hover {
     background-color: #c0c0c0;
