@@ -101,7 +101,7 @@ const changePage = (page: number) => {
           </div>
           <div v-else class="post-item__tags">
             <span
-              class="tag-badge tag-badge--none inline-flex items-center text-sm font-normal px-3 py-1 rounded bg-green-600 text-white">#无标签</span>
+              class="tag-badge tag-badge--none inline-flex items-center text-sm font-normal px-3 py-1 rounded bg-green-500 text-white">#无标签</span>
           </div>
 
           <time class="post-item__date">{{ post.date }}</time>
