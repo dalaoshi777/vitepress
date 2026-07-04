@@ -28,7 +28,7 @@ const friends: FriendLink[] = [
       <div v-else class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
         <a v-for="friend in friends" :key="friend.url" :href="friend.url" target="_blank" rel="noopener noreferrer"
           class="flex items-center gap-3 p-4 rounded-xl border border-slate-200 bg-white no-underline transition-all duration-200 hover:border-green-500 hover:shadow-lg hover:shadow-green-500/10 hover:-translate-y-0.5 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-green-500 dark:hover:bg-slate-700">
-          <img :src="friend.avatar" :alt="friend.name" class="w-12 h-12 rounded-full object-cover flex-shrink-0"
+          <img :src="friend.avatar" :alt="friend.name" class="w-12 h-12 rounded-full object-cover shrink-0"
             loading="lazy" @error="(e: Event) => (e.target as HTMLImageElement).style.display = 'none'" />
           <div class="flex flex-col gap-1 overflow-hidden">
             <span class="text-base font-semibold text-slate-800 dark:text-slate-200 truncate">{{ friend.name }}</span>
