@@ -27,8 +27,9 @@ const { page, frontmatter } = useData()
         </article>
       </div>
     </main>
-    <footer class="site-footer">
-      <p>© 2026 dalaoshi777. Powered by VitePress</p>
+    <footer
+      class="site-footer p-4 flex justify-center items-center text-black dark:text-white bg-gray-50 dark:bg-[#17181A]">
+      © 2026 dalaoshi777. Powered by VitePress
     </footer>
   </div>
 </template>
@@ -48,8 +49,6 @@ const { page, frontmatter } = useData()
   z-index: 100;
 }
 
-.site-main {}
-
 .article-container {
   display: flex;
   justify-content: center;
@@ -62,13 +61,5 @@ const { page, frontmatter } = useData()
 .article-title {
   margin: 0;
   text-align: center;
-}
-
-.site-footer {
-  text-align: center;
-  padding: 20px;
-  border-top: 1px solid #eee;
-  color: var(--text-color);
-  background-color: var(--main-bg);
 }
 </style>

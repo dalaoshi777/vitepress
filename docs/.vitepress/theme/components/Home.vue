@@ -95,13 +95,13 @@ const changePage = (page: number) => {
 
           <div v-if="post.tags && post.tags.length" class="post-item__tags flex gap-2">
             <span v-for="tag in post.tags" :key="tag"
-              class="tag-badge inline-flex items-center text-sm font-normal px-3 py-1 rounded bg-green-500 text-white">{{
+              class="tag-badge inline-flex items-center text-sm font-semibold px-2 py-1 rounded bg-green-500 text-white">{{
                 tag
               }}</span>
           </div>
           <div v-else class="post-item__tags">
             <span
-              class="tag-badge tag-badge--none inline-flex items-center text-sm font-normal px-3 py-1 rounded bg-green-500 text-white">无标签</span>
+              class="tag-badge tag-badge--none inline-flex items-center text-sm font-semibold px-2 py-1 rounded bg-green-500 text-white">无标签</span>
           </div>
 
           <time class="post-item__date">{{ post.date }}</time>
@@ -109,17 +109,21 @@ const changePage = (page: number) => {
         </a>
       </div>
       <template v-if="filteredPosts.length > pageSize" #footer>
-        <div class="pagination">
-          <button class="pagination__btn" :disabled="currentPage === 1" @click="changePage(currentPage - 1)">
-            &lt; 上一页
+        <div class="pagination flex justify-center items-center gap-4">
+          <button
+            class="pagination__btn text-sm inline-flex justify-center items-center px-4 py-2 rounded-md shadow-xm border border-gray-300 active:scale-95 hover:bg-gray-100 dark:hover:bg-gray-50/10 dark:text-white"
+            :disabled="currentPage === 1" @click="changePage(currentPage - 1)">
+            上一页
           </button>
 
-          <span class="pagination__info">
+          <span class="pagination__info text-black dark:text-white">
             {{ currentPage }} / {{ totalPages }} 页
           </span>
 
-          <button class="pagination__btn" :disabled="currentPage === totalPages" @click="changePage(currentPage + 1)">
-            下一页 &gt;
+          <button
+            class="pagination__btn text-sm inline-flex justify-center items-center px-4 py-2 rounded-md shadow-xm border border-gray-300 active:scale-95 hover:bg-gray-100 dark:hover:bg-gray-50/10 dark:text-white"
+            :disabled="currentPage === totalPages" @click="changePage(currentPage + 1)">
+            下一页
           </button>
         </div>
       </template>
@@ -139,11 +143,6 @@ const changePage = (page: number) => {
   justify-content: center;
   flex-direction: column;
   gap: 24px;
-}
-
-.post-card {
-  width: 100%;
-  max-width: 960px;
 }
 
 .post-item__date {
@@ -187,41 +186,7 @@ const changePage = (page: number) => {
   box-shadow: 0 4px 12px rgba(62, 175, 124, 0.25);
 }
 
-
-/* ==========================================
-   6. 分页控件样式
-   ========================================== */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  padding: 8px 0;
-  width: 100%;
-}
-
-.pagination__info {
-  font-size: 14px;
-  color: #64748b;
-  font-weight: 500;
-}
-
 .pagination__btn {
-  cursor: pointer;
-  border: 1px solid #e2e8f0;
-  background-color: #fff;
-  color: #475569;
-  padding: 6px 14px;
-  font-size: 0.85rem;
-  border-radius: 6px;
-  transition: all 0.2s ease-in-out;
-  outline: none;
-
-  &:hover:not(:disabled) {
-    border-color: #3eaf7c;
-    color: #3eaf7c;
-    transform: translateY(-1px);
-  }
 
   &:active:not(:disabled) {
     transform: scale(0.97);
