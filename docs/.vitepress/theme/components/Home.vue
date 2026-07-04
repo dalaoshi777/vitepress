@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Card from './Card.vue'
 import { data as posts } from '../posts.data'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 const allTags = computed(() => {
   const tagsSet = new Set<string>()
@@ -13,10 +13,8 @@ const allTags = computed(() => {
   return Array.from(tagsSet)
 })
 
-// 2. 选中的标签响应式状态
 const selectedTags = ref<string[]>([])
 
-// 3. 点击切换标签选中状态
 const toggleTag = (tag: string) => {
   const index = selectedTags.value.indexOf(tag)
   if (index > -1) {
@@ -26,7 +24,6 @@ const toggleTag = (tag: string) => {
   }
 }
 
-// 4. ✨ 实时动态过滤文章（源头使用你的 posts）
 const filteredPosts = computed(() => {
   if (selectedTags.value.length === 0) {
     return posts
@@ -37,167 +34,91 @@ const filteredPosts = computed(() => {
   })
 })
 
-const currentPage = ref(1) // 当前页码，默认第一页
-const pageSize = ref(4)    // 每页显示 5 篇文章（可以根据需要调整）
+const currentPage = ref(1)
+const pageSize = ref(4)
 
-// 当切换标签导致过滤后的文章总数变少时，重置当前页码到第一页，防止页码溢出
-import { watch } from 'vue'
 watch(filteredPosts, () => {
   currentPage.value = 1
 })
 
-// 计算总页数
 const totalPages = computed(() => {
   return Math.ceil(filteredPosts.value.length / pageSize.value) || 1
 })
 
-// ✨ 最终渲染到当前页面的文章切片
 const paginatedPosts = computed(() => {
   const start = (currentPage.value - 1) * pageSize.value
   const end = start + pageSize.value
   return filteredPosts.value.slice(start, end)
 })
 
-// 页码切换方法
 const changePage = (page: number) => {
   if (page >= 1 && page <= totalPages.value) {
     currentPage.value = page
-    // 可选：切换页面时自动平滑滚动回顶部
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 }
 </script>
 
 <template>
-  <div class="home-container">
-    <Card v-if="allTags.length > 0" title="标签云" class="post-card">
-      <div class="tag-cloud-wrapper">
-        <div class="tag-cloud__list">
-          <button v-for="tag in allTags" :key="tag" class="bg-white text-black dark:bg-black dark:text-white"
-            :class="['tag-cloud__item', { 'is-active': selectedTags.includes(tag) }]" @click="toggleTag(tag)">
+  <div class="min-h-full max-w-4xl mx-auto my-10 px-6 flex flex-col justify-center gap-6">
+    <Card v-if="allTags.length > 0" title="标签云">
+      <div class="py-1">
+        <div class="flex flex-wrap gap-2.5">
+          <button v-for="tag in allTags" :key="tag"
+            class="cursor-pointer px-3.5 py-1.5 text-sm rounded-lg transition-all duration-200"
+            :class="selectedTags.includes(tag)
+              ? 'border border-green-500 bg-green-500 text-white shadow-md shadow-green-500/25'
+              : 'border border-slate-200 bg-white text-slate-600 hover:border-green-500 hover:text-green-500 hover:-translate-y-0.5 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-green-500 dark:hover:text-green-500'"
+            @click="toggleTag(tag)">
             #{{ tag }}
           </button>
         </div>
       </div>
     </Card>
 
-    <Card title="文章列表" class="post-card">
-
-      <div v-if="filteredPosts.length === 0" class="no-posts">
+    <Card title="文章列表">
+      <div v-if="filteredPosts.length === 0" class="text-center py-10 text-slate-400">
         📭 暂无文章发布
       </div>
 
-      <div v-else class="posts-list flex flex-col gap-2">
+      <div v-else class="flex flex-col gap-2">
         <a v-for="post in paginatedPosts" :key="post.url" :href="post.url"
-          class="post-item flex flex-col p-3 gap-3 rounded-lg bg-gray-100 dark:bg-[#17181A] hover:bg-gray-200/80 dark:hover:bg-white/5">
+          class="flex flex-col p-3 gap-3 rounded-lg bg-gray-100 hover:bg-gray-200/80 dark:bg-[#17181A] dark:hover:bg-white/5">
+          <span class="text-xl font-bold text-black dark:text-white">{{ post.title }}</span>
 
-          <span class="post-item__title text-xl font-bold text-black dark:text-white">{{ post.title }}</span>
-
-          <div v-if="post.tags && post.tags.length" class="post-item__tags flex gap-2">
+          <div v-if="post.tags && post.tags.length" class="flex gap-2">
             <span v-for="tag in post.tags" :key="tag"
-              class="tag-badge inline-flex items-center text-sm font-semibold px-2 py-1 rounded bg-green-500 text-white">{{
-                tag
+              class="inline-flex items-center text-sm font-semibold px-2 py-1 rounded bg-green-500 text-white">{{ tag
               }}</span>
           </div>
-          <div v-else class="post-item__tags">
+          <div v-else class="flex gap-2">
             <span
-              class="tag-badge tag-badge--none inline-flex items-center text-sm font-semibold px-2 py-1 rounded bg-green-500 text-white">无标签</span>
+              class="inline-flex items-center text-sm font-semibold px-2 py-1 rounded bg-green-500 text-white">无标签</span>
           </div>
 
-          <time class="post-item__date">{{ post.date }}</time>
-
+          <time class="text-sm text-slate-400 font-normal">{{ post.date }}</time>
         </a>
       </div>
+
       <template v-if="filteredPosts.length > pageSize" #footer>
-        <div class="pagination flex justify-center items-center gap-4">
+        <div class="flex justify-center items-center gap-4">
           <button
-            class="pagination__btn text-sm inline-flex justify-center items-center px-4 py-2 rounded-md shadow-xm border border-gray-300 active:scale-95 hover:bg-gray-100 dark:hover:bg-gray-50/10 dark:text-white"
+            class="text-sm inline-flex justify-center items-center px-4 py-2 rounded-md shadow-xs border border-gray-300 transition-all active:scale-95 hover:bg-gray-100 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400 disabled:border-slate-200 dark:hover:bg-gray-50/10 dark:text-white dark:disabled:bg-slate-800 dark:disabled:text-slate-600 dark:disabled:border-slate-700"
             :disabled="currentPage === 1" @click="changePage(currentPage - 1)">
             上一页
           </button>
 
-          <span class="pagination__info text-black dark:text-white">
+          <span class="text-black dark:text-white">
             {{ currentPage }} / {{ totalPages }} 页
           </span>
 
           <button
-            class="pagination__btn text-sm inline-flex justify-center items-center px-4 py-2 rounded-md shadow-xm border border-gray-300 active:scale-95 hover:bg-gray-100 dark:hover:bg-gray-50/10 dark:text-white"
+            class="text-sm inline-flex justify-center items-center px-4 py-2 rounded-md shadow-xs border border-gray-300 transition-all active:scale-95 hover:bg-gray-100 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400 disabled:border-slate-200 dark:hover:bg-gray-50/10 dark:text-white dark:disabled:bg-slate-800 dark:disabled:text-slate-600 dark:disabled:border-slate-700"
             :disabled="currentPage === totalPages" @click="changePage(currentPage + 1)">
             下一页
           </button>
         </div>
       </template>
-
     </Card>
   </div>
 </template>
-
-
-<style scoped>
-.home-container {
-  min-height: 100%;
-  max-width: 960px;
-  margin: 40px auto;
-  padding: 0 24px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.post-item__date {
-  font-size: 14px;
-  color: #94a3b8;
-  font-weight: normal;
-}
-
-
-.tag-cloud-wrapper {
-  padding: 4px 0;
-}
-
-.tag-cloud__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.tag-cloud__item {
-  cursor: pointer;
-  border: 1px solid #e2e8f0;
-  background-color: #fff;
-  color: #475569;
-  padding: 6px 14px;
-  font-size: 0.85rem;
-  border-radius: 8px;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    border-color: #3eaf7c;
-    color: #3eaf7c;
-    transform: translateY(-1px);
-  }
-}
-
-.tag-cloud__item.is-active {
-  background-color: #3eaf7c;
-  border-color: #3eaf7c;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(62, 175, 124, 0.25);
-}
-
-.pagination__btn {
-
-  &:active:not(:disabled) {
-    transform: scale(0.97);
-  }
-
-  /* 禁用状态（比如第一页时的上一页） */
-  &:disabled {
-    cursor: not-allowed;
-    background-color: #f1f5f9;
-    color: #cbd5e1;
-    border-color: #e2e8f0;
-  }
-}
-</style>

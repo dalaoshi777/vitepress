@@ -31,6 +31,8 @@ export default createContentLoader('posts/*.md', {
 })
 
 function formatDate(raw: any): string {
+  // 处理 undefined / null / 空字符串等无效输入
+  if (!raw) return new Date().toISOString().slice(0, 10)
   const date = raw instanceof Date ? raw : new Date(raw)
   if (isNaN(date.getTime())) return new Date().toISOString().slice(0, 10)
   return date.toISOString().slice(0, 10) // 返回 YYYY-MM-DD 格式

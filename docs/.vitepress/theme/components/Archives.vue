@@ -3,7 +3,6 @@ import { computed } from 'vue'
 import Card from './Card.vue'
 import { data as posts } from '../posts.data'
 
-// 1. 自动按年份归类文章
 const archiveData = computed(() => {
   const groups: Record<string, typeof posts> = {}
 
@@ -25,7 +24,6 @@ const archiveData = computed(() => {
     }))
 })
 
-// 2. 格式化月日（06-15）
 const formatMD = (dateStr: string) => {
   try {
     const date = new Date(dateStr)
@@ -39,110 +37,31 @@ const formatMD = (dateStr: string) => {
 </script>
 
 <template>
-  <div class="archive-container">
-    <Card title="文章归档" class="archive-card">
-
-      <div v-if="archiveData.length === 0" class="no-archives">
+  <div class="min-h-full max-w-4xl mx-auto my-10 px-6 flex justify-center">
+    <Card title="文章归档" class="w-full">
+      <div v-if="archiveData.length === 0" class="text-center py-10 text-slate-400">
         📭 暂无归档文章
       </div>
 
-      <div v-else class="archive-list">
-        <div v-for="group in archiveData" :key="group.year" class="archive-year-section">
+      <div v-else class="flex flex-col gap-7">
+        <div v-for="group in archiveData" :key="group.year" class="flex flex-col">
+          <h2
+            class="text-xl font-bold text-slate-800 mb-3 pb-1.5 border-b border-dashed border-slate-200 dark:text-slate-200 dark:border-slate-700">
+            {{ group.year }}
+          </h2>
 
-          <h2 class="archive-year-title">{{ group.year }}</h2>
-
-          <div class="archive-posts-list">
-            <a v-for="post in group.list" :key="post.url" :href="post.url" class="archive-post-item">
-              <span class="archive-post-item__date">{{ formatMD(post.date) }}</span>
-              <span class="archive-post-item__title">{{ post.title }}</span>
+          <div class="flex flex-col gap-1">
+            <a v-for="post in group.list" :key="post.url" :href="post.url"
+              class="group flex items-center gap-5 no-underline py-2 px-1 rounded transition-colors duration-150 hover:bg-slate-50 dark:hover:bg-[#1c1e21]">
+              <span class="text-sm text-slate-400 font-mono min-w-[45px]">{{ formatMD(post.date) }}</span>
+              <span
+                class="text-[15px] text-slate-700 transition-colors duration-150 group-hover:text-green-500 dark:text-slate-300 dark:group-hover:text-green-500">
+                {{ post.title }}
+              </span>
             </a>
           </div>
-
         </div>
       </div>
-
     </Card>
   </div>
 </template>
-
-<style scoped>
-.archive-container {
-  min-height: 100%;
-  max-width: 960px;
-  margin: 40px auto;
-  padding: 0 24px;
-  display: flex;
-  justify-content: center;
-}
-
-.archive-card {
-  width: 100%;
-  max-width: 960px;
-}
-
-.archive-list {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  /* 年份区块之间的间距 */
-}
-
-.archive-year-section {
-  display: flex;
-  flex-direction: column;
-}
-
-/* 干净的纯文字年份 */
-.archive-year-title {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #1e293b;
-  margin: 0 0 12px 0;
-  padding-bottom: 6px;
-  border-bottom: 1px dashed #e2e8f0;
-}
-
-.archive-posts-list {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.archive-post-item {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  text-decoration: none;
-  padding: 8px 4px;
-  border-radius: 4px;
-  transition: background-color 0.15s ease;
-
-  &:hover {
-    background-color: #f8fafc;
-
-    .archive-post-item__title {
-      color: #3eaf7c;
-    }
-  }
-}
-
-.archive-post-item__date {
-  font-size: 14px;
-  color: #94a3b8;
-  font-family: monospace;
-  min-width: 45px;
-}
-
-/* 标题 */
-.archive-post-item__title {
-  font-size: 15px;
-  color: #334155;
-  transition: color 0.15s ease;
-}
-
-.no-archives {
-  text-align: center;
-  padding: 40px 0;
-  color: #94a3b8;
-}
-</style>

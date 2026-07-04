@@ -3,26 +3,9 @@
 </script>
 
 <template>
-  <div class="not-found-container">
-    <img src="/logo.png" alt="404" class="not-found-img" />
-    <p>抱歉，您访问的页面不存在。</p>
-    <a href="/" class="home-link">返回首页</a>
+  <div class="flex flex-col items-center justify-center h-full text-center gap-4">
+    <img src="/logo.png" alt="404" class="w-[200px] h-auto" />
+    <p class="text-slate-500 dark:text-slate-400">抱歉，您访问的页面不存在。</p>
+    <a href="/" class="text-green-600 dark:text-green-400 hover:underline transition-colors">返回首页</a>
   </div>
 </template>
-
-<style scoped>
-.not-found-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  text-align: center;
-  gap: 16px;
-}
-
-.not-found-img {
-  width: 200px;
-  height: auto;
-}
-</style>

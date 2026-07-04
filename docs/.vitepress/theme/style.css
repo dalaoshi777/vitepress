@@ -2,9 +2,9 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ===== Base ===== */
 html {
-  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scrollbar-gutter: stable;
@@ -12,217 +12,268 @@ html {
 
 html,
 body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
+  @apply m-0 p-0 w-full h-full;
 }
 
 * {
-  box-sizing: border-box;
+  @apply box-border;
 }
 
-/* markdown样式 */
+/* ===== Markdown Body ===== */
 .markdown-body {
-  display: flex;
-  flex-direction: column;
+  @apply flex flex-col w-full p-6 rounded-xl;
   font-family: 'Noto Sans SC', sans-serif;
   font-size: 16px;
-  line-height: 1.75;
-  color: #2c3e50;
-  width: 100%;
-  padding: 16px;
+  line-height: 1.8;
+  color: #334155;
   background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
+.dark .markdown-body {
+  color: #c9d1d9;
+  background-color: #1a1b1d;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== Paragraphs & Links ===== */
+.markdown-body p {
+  @apply my-3;
+}
+
+.markdown-body a {
+  @apply text-green-600 transition-colors;
+  text-decoration: none;
+}
+
+.dark .markdown-body a {
+  @apply text-green-400;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Headings ===== */
 .markdown-body h1 {
-  font-size: 2.2rem;
-  font-weight: 700;
+  @apply text-3xl font-bold mb-4 mt-2;
 }
 
-/* 小章节标题 */
 .markdown-body h2 {
-  border-radius: 6px;
-  padding: 0.2rem 0.5rem;
-  font-size: 1.65rem;
-  font-weight: 600;
-  background-color: oklch(98.2% 0.018 155.826);
-  border: 1px solid oklch(92.5% 0.084 155.995);
+  @apply text-2xl font-semibold mt-8 mb-4 pb-2;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.dark .markdown-body h2 {
+  border-bottom-color: #2d333b;
 }
 
 .markdown-body h3 {
-  border-radius: 6px;
-  background-color: oklch(98.7% 0.026 102.212);
-  border: 1px solid oklch(94.5% 0.071 103.193);
-  padding: 0.2rem 0.5rem;
-  font-size: 1.35rem;
-  font-weight: 600;
+  @apply text-xl font-semibold mt-6 mb-3 pl-3;
+  border-left: 4px solid #3eaf7c;
 }
 
+.markdown-body h4 {
+  @apply text-lg font-semibold mt-5 mb-2;
+}
 
+.markdown-body h5 {
+  @apply text-base font-semibold mt-4 mb-2;
+}
+
+.markdown-body h6 {
+  @apply text-sm font-semibold mt-4 mb-2 text-slate-500;
+}
+
+.dark .markdown-body h6 {
+  @apply text-slate-400;
+}
+
+/* ===== Images ===== */
 .markdown-body img {
-  display: block;
-  max-width: 100% !important;
-  height: auto !important;
-  border-radius: 6px;
+  @apply block max-w-full h-auto rounded-lg my-4;
 }
 
+/* ===== Lists ===== */
+.markdown-body ul {
+  @apply list-disc pl-6 my-3;
+}
+
+.markdown-body ol {
+  @apply list-decimal pl-6 my-3;
+}
+
+.markdown-body li {
+  @apply my-1;
+}
+
+/* ===== Blockquote ===== */
+.markdown-body blockquote {
+  @apply border-l-4 border-green-500 pl-4 my-4 italic text-slate-500;
+}
+
+.dark .markdown-body blockquote {
+  @apply text-slate-400;
+}
+
+/* ===== HR ===== */
+.markdown-body hr {
+  @apply border-0 my-6;
+  border-top: 1px solid #e2e8f0;
+}
+
+.dark .markdown-body hr {
+  border-top-color: #2d333b;
+}
+
+/* ===== Inline Code ===== */
+.markdown-body :not(pre)>code {
+  @apply rounded px-1.5 py-0.5 text-sm font-mono;
+  background-color: rgba(175, 184, 193, 0.2);
+  color: #d6336c;
+}
+
+.dark .markdown-body :not(pre)>code {
+  background-color: rgba(110, 118, 129, 0.4);
+  color: #f0883e;
+}
+
+/* ===== Tables ===== */
 .markdown-body table {
-  display: block;
-  width: 100%;
-  overflow-x: auto;
-  border-collapse: collapse;
+  @apply block w-full overflow-x-auto my-4 border-collapse;
 }
 
-/* 单元格通用基础设置（表头和正文格） */
 .markdown-body th,
 .markdown-body td {
-  padding: 10px 16px;
-  /* 舒适的格子留白 */
+  @apply px-4 py-2.5 text-left text-sm leading-relaxed;
   border: 1px solid #e2e8f0;
-  /* 现代细腻的淡灰边框 */
-  font-size: 0.95rem;
-  /* 表格字号比正文稍微小一点点，更精致 */
-  line-height: 1.5;
-  text-align: left;
-  /* 默认左对齐 */
 }
 
-/* 🌟 表头特化样式 (th) */
+.dark .markdown-body th,
+.dark .markdown-body td {
+  border-color: #2d333b;
+}
+
 .markdown-body th {
-  font-weight: 600;
+  @apply font-semibold;
   color: #1e293b;
-  /* 深色文字 */
   background-color: #f8fafc;
-  /* 表头淡淡的灰色背景，拉开层级 */
 }
 
-/* 🌟 隔行变色（斑马纹）
-   给偶数行 (even) 加上极淡的底色，方便眼睛换行阅读数据 */
+.dark .markdown-body th {
+  color: #e2e8f0;
+  background-color: #21262d;
+}
+
 .markdown-body tbody tr:nth-child(even) {
   background-color: #fcfcfd;
 }
 
-/* 鼠标悬停在某一行时，该行高亮变色（极佳的交互细节） */
+.dark .markdown-body tbody tr:nth-child(even) {
+  background-color: #1c1e21;
+}
+
 .markdown-body tbody tr:hover {
   background-color: #f1f5f9;
 }
 
-
-
-
-
-
-.markdown-body [class^="language-"] {
-  position: relative;
-  margin: 1.5rem 0;
-  /* 上下推开间距，与段落保持呼吸感 */
-  background-color: #f6f8fa;
-  /* 浅色主题底色（如果是深色主题可用 #1e1e1e 等） */
-  border-radius: 8px;
-  /* 代码块圆角 */
-  border: 1px solid #e1e4e8;
-  /* 淡淡的边框，让代码块轮廓更清晰 */
-  overflow: hidden;
-  /* 确保内部多出的内容或圆角不溢出 */
+.dark .markdown-body tbody tr:hover {
+  background-color: #262b33;
 }
 
-/* ==========================================
-   2. 核心防溢出：真正的代码标签 (pre)
-   ========================================== */
+/* ===== Code Blocks ===== */
+.markdown-body [class^="language-"] {
+  @apply relative my-6 rounded-lg overflow-hidden;
+  background-color: #f6f8fa;
+  border: 1px solid #e1e4e8;
+}
+
+.dark .markdown-body [class^="language-"] {
+  background-color: #161b22;
+  border-color: #2d333b;
+}
+
 .markdown-body [class^="language-"] pre {
-  margin: 0;
-  padding: 1.25rem 1.5rem;
+  @apply m-0 py-5 px-6 overflow-x-auto;
   background: transparent !important;
-  overflow-x: auto;
   white-space: pre;
-  word-break: normal;
-  font-family: ui-monospace, SFMono-Regular, SF Pro Text, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.9rem;
   line-height: 1.6;
 }
 
-/* ==========================================
-   3. 右上角语言提示标签 (如图中的 powershell)
-   ========================================== */
+/* Language label */
 .markdown-body [class^="language-"] span.lang {
-  position: absolute;
-  top: 2%;
-  right: 8px;
-  z-index: 2;
-  font-size: 0.75rem;
+  @apply absolute top-2 right-2 z-[2] text-xs pointer-events-none;
   color: #6a737d;
   font-family: sans-serif;
-  pointer-events: none;
-  /* 防止鼠标悬停干扰复制按钮 */
+  transition: opacity 0.2s ease;
 }
 
-/* ==========================================
-   4. 复制代码按钮 (Copy Code Button)
-   ========================================== */
+.dark .markdown-body [class^="language-"] span.lang {
+  color: #6a737d;
+}
+
+.markdown-body [class^="language-"]:hover span.lang {
+  opacity: 0;
+}
+
+/* ===== Copy Button ===== */
 html .markdown-body div[class*="language-"] button.copy {
-  display: block !important;
-  position: absolute !important;
-  top: 10px !important;
-  right: 12px !important;
-  width: 32px !important;
-  height: 32px !important;
-  border-radius: 6px !important;
-  /* 稍微圆润一点更现代 */
-  border: 1px solid rgba(60, 60, 67, 0.12) !important;
-  background-color: #ffffff !important;
-  cursor: pointer !important;
-  opacity: 0 !important;
-  /* 默认隐形 */
-  z-index: 10 !important;
-
-  /* 🌟 核心：把原本的 "Copy Code" 文字缩写成 0，彻底变纯图标按钮 */
-  font-size: 0 !important;
-  color: transparent !important;
-
-  /* 默认：未点击时的双页剪贴板图标（比原本的单页更好看、线条更细） */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(60,60,67,0.7)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'%3E%3C/path%3E%3C/svg%3E") !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-size: 15px !important;
-
-  /* 丝滑过渡：加入了点击微缩（transform）的过渡 */
-  transition: opacity 0.2s ease, background-color 0.2s ease, transform 0.1s ease !important;
+  @apply absolute z-[10] block;
+  top: 10px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid rgba(60, 60, 67, 0.12);
+  background-color: #ffffff;
+  cursor: pointer;
+  opacity: 0;
+  font-size: 0;
+  color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(60,60,67,0.7)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 15px;
+  transition: opacity 0.2s ease, background-color 0.2s ease, transform 0.1s ease;
 }
 
-/* =========================================
-   2. 悬停与物理按压交互
-   ========================================= */
+html .dark .markdown-body div[class*="language-"] button.copy {
+  background-color: #21262d;
+  border-color: rgba(205, 217, 230, 0.12);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(205,217,230,0.7)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'%3E%3C/path%3E%3C/svg%3E");
+}
 
-/* 鼠标划入代码块，按钮显现 */
 html .markdown-body div[class*="language-"]:hover button.copy {
-  opacity: 1 !important;
+  opacity: 1;
 }
 
-/* 鼠标精准悬停在按钮上时，背景微灰 */
 html .markdown-body div[class*="language-"] button.copy:hover {
-  background-color: #f6f6f7 !important;
+  background-color: #f6f6f7;
 }
 
-/* 🌟 增加物理点击反馈：点下去的一瞬间按钮陷下去一点，极具操作感 */
+html .dark .markdown-body div[class*="language-"] button.copy:hover {
+  background-color: #2d333b;
+}
+
 html .markdown-body div[class*="language-"] button.copy:active {
-  transform: scale(0.92) !important;
+  transform: scale(0.92);
 }
 
 html .markdown-body div[class*="language-"] button.copy.copied,
 html .markdown-body div[class*="language-"] button.copy[title*="Copied"],
 html .markdown-body div[class*="language-"] button.copy[title*="成功"] {
-  opacity: 1 !important;
-  /* 成功状态：变成你准备的绿色精致对勾 */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%233eaf7c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") !important;
-  background-size: 16px !important;
-  background-color: #e6f4ea !important;
-  /* 🌟 顺便让背景变成淡淡的科技绿，反馈更直观！ */
-  border-color: rgba(62, 175, 124, 0.3) !important;
+  opacity: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%233eaf7c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+  background-size: 16px;
+  background-color: #e6f4ea;
+  border-color: rgba(62, 175, 124, 0.3);
 }
 
-.markdown-body [class^="language-"]:hover span.lang {
-  opacity: 0;
+html .dark .markdown-body div[class*="language-"] button.copy.copied,
+html .dark .markdown-body div[class*="language-"] button.copy[title*="Copied"],
+html .dark .markdown-body div[class*="language-"] button.copy[title*="成功"] {
+  background-color: #1a2e1f;
+  border-color: rgba(62, 175, 124, 0.3);
 }

@@ -1,8 +1,6 @@
 <script lang="ts" setup>
-import { title } from 'node:process';
 import { useData } from 'vitepress'
-const { page } = useData()
-const { isDark } = useData()
+const { page, isDark } = useData()
 function toggleTheme() {
   isDark.value = !isDark.value
 }
