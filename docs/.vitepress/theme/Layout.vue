@@ -6,6 +6,7 @@ import Home from './components/Home.vue'
 import Archives from './components/Archives.vue'
 import NotFound from './components/NotFound.vue'
 import Friends from './components/Friends.vue'
+import DocToc from './components/DocToc.vue'
 
 const { page, frontmatter } = useData()
 const route = useRoute()
@@ -45,14 +46,19 @@ onUnmounted(() => {
       <NotFound v-else-if="page.isNotFound" />
       <Friends v-else-if="frontmatter.layout === 'friends'" />
       <Archives v-else-if="frontmatter.layout === 'archives'" />
-      <div v-else class="flex justify-center min-h-full max-w-4xl mx-auto my-10 px-6">
-        <article class="markdown-body">
-          <h1 v-if="frontmatter.title" class="m-0 text-center">{{ frontmatter.title }}</h1>
-          <p v-if="frontmatter.description" class="text-center text-slate-500 dark:text-slate-400">{{
-            frontmatter.description }}</p>
-          <p v-if="frontmatter.date" class="text-center text-sm text-slate-400">📅{{ frontmatter.date }}</p>
-          <Content />
-        </article>
+      <div v-else class="flex justify-center min-h-full max-w-6xl mx-auto my-10 px-6">
+        <div class="flex gap-8 w-full max-w-4xl">
+          <article class="markdown-body flex-1 min-w-0">
+            <h1 v-if="frontmatter.title" class="m-0 text-center">{{ frontmatter.title }}</h1>
+            <p v-if="frontmatter.description" class="text-center text-slate-500 dark:text-slate-400">{{
+              frontmatter.description }}</p>
+            <p v-if="frontmatter.date" class="text-center text-sm text-slate-400">📅{{ frontmatter.date }}</p>
+            <Content />
+          </article>
+          <aside class="hidden lg:block flex-shrink-0">
+            <DocToc />
+          </aside>
+        </div>
       </div>
     </main>
     <footer class="p-4 flex justify-center items-center text-black dark:text-white bg-gray-50 dark:bg-[#17181A]">

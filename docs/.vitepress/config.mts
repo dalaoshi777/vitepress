@@ -12,7 +12,10 @@ export default defineConfig({
   cleanUrls: true,
   lastUpdated: true,
   markdown: {
-    theme: 'github-light',
+    theme: {
+      light: 'github-light',
+      dark: 'github-dark',
+    },
     lineNumbers: false,
   },
   head: [
