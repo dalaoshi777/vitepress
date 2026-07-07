@@ -202,6 +202,24 @@ body {
   line-height: 1.6;
 }
 
+/* ===== Shiki 代码高亮变量映射 ===== */
+/* Shiki 通过 --shiki-light / --shiki-dark 定义颜色，需手动映射到 color */
+.markdown-body [class^="language-"] pre code {
+  color: var(--shiki-light);
+}
+
+.markdown-body [class^="language-"] pre code span[style] {
+  color: var(--shiki-light);
+}
+
+.dark .markdown-body [class^="language-"] pre code {
+  color: var(--shiki-dark);
+}
+
+.dark .markdown-body [class^="language-"] pre code span[style] {
+  color: var(--shiki-dark);
+}
+
 /* Language label */
 .markdown-body [class^="language-"] span.lang {
   @apply absolute top-2 right-2 z-[2] text-xs pointer-events-none;
