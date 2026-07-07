@@ -55,7 +55,7 @@ onUnmounted(() => {
             <p v-if="frontmatter.date" class="text-center text-sm text-slate-400">📅{{ frontmatter.date }}</p>
             <Content />
           </article>
-          <aside class="hidden lg:block flex-shrink-0">
+          <aside class="hidden lg:block shrink-0">
             <DocToc />
           </aside>
         </div>
